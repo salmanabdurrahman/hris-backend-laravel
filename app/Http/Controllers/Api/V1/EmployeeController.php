@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\V1\StoreEmployeeRequest;
+use App\Http\Requests\Api\V1\UpdateEmployeeRequest;
 use App\Http\Resources\EmployeeCollection;
 use App\Http\Resources\EmployeeResource;
 use App\Interfaces\EmployeeRepositoryInterface;
@@ -29,7 +31,7 @@ class EmployeeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreEmployeeRequest $request)
     {
         $employee = $this->employeeRepository->createEmployee($request->validated());
         return response()->json([
@@ -51,7 +53,7 @@ class EmployeeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateEmployeeRequest $request, string $id)
     {
         $this->employeeRepository->updateEmployee($id, $request->validated());
         return response()->json([
